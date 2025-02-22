@@ -220,6 +220,17 @@ install-tools: $(ALL_TOOLS:obj/%=$(DESTDIR)$(bindir)/%)
 
 install: install-libs install-headers install-tools
 
+uninstall-libs:
+	rm -rf $(DESTDIR)$(libdir)
+
+uninstall-headers:
+	rm -rf $(DESTDIR)$(includedir)
+
+uninstall-tools:
+	rm -rf $(DESTDIR)$(bindir)
+
+uninstall: uninstall-libs uninstall-headers uninstall-tools
+
 musl-git-%.tar.gz: .git
 	 git --git-dir=$(srcdir)/.git archive --format=tar.gz --prefix=$(patsubst %.tar.gz,%,$@)/ -o $@ $(patsubst musl-git-%.tar.gz,%,$@)
 
